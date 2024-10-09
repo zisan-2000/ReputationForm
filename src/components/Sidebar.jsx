@@ -4,7 +4,6 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/Reputation_Prime_Logo.png";
-import CollapsedLogo from "../assets/images/logo.jpeg";
 
 const Sidebar = () => {
   const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });
@@ -31,11 +30,7 @@ const Sidebar = () => {
       {/* Sidebar Header */}
       <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-700 p-4 shadow-lg">
         <div className="rounded-full bg-yellow-100">
-          <img
-            src={isCollapsed ? CollapsedLogo : Logo}
-            alt="Logo"
-            className={`h-8`}
-          />
+          {!isCollapsed && <img src={Logo} alt="Logo" className="h-8" />}
         </div>
         <button onClick={toggleSidebar} className="text-2xl">
           {isCollapsed ? <FaBars /> : <FaTimes />}
