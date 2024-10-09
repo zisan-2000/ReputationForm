@@ -1,10 +1,10 @@
-import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import CreateLead from "./pages/CreateLead";
 import CreateProduct from "./pages/CreateProduct"; // Import the new page
 import CreateTask from "./pages/CreateTask";
+import Home from "./pages/Home";
 import MyArticles from "./pages/MyArticles";
 import MyPlan from "./pages/MyPlan";
 import MyPost from "./pages/MyPost";
@@ -19,6 +19,7 @@ const App = () => {
           <Header />
           <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto bg-gray-100 p-6">
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/my-plan" element={<MyPlan />} />
               <Route path="/my-post" element={<MyPost />} />
               <Route path="/my-articles" element={<MyArticles />} />
