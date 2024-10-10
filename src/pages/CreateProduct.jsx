@@ -1,75 +1,116 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import InputField from "../components/ReuseableComp/InputField";
-import SelectField from "../components/ReuseableComp/SelectField";
-import Textarea from "../components/ReuseableComp/Textarea";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import {
   initialFormData,
   priceTypeOptions,
   typeOptions,
+  validationSchema,
 } from "../Data/CreateProductData";
 
 const CreateProduct = () => {
-  const [formData, setFormData] = useState(initialFormData);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    console.log("Form Data:", formData);
+  const handleSubmit = (values, { resetForm }) => {
+    console.log("Form Data:", values);
+    resetForm();
   };
 
   return (
     <div className="mx-auto mt-8 max-w-3xl rounded bg-white p-4 shadow-lg">
       <h2 className="mb-6 text-2xl">Create Product</h2>
-      <form>
-        <SelectField
-          label="Type"
-          options={typeOptions}
-          value={formData.type}
-          onChange={handleChange}
-          name="type"
-        />
-        <InputField
-          label="Name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          name="name"
-        />
-        <InputField
-          label="Default Price"
-          placeholder="Default Price"
-          value={formData.defaultPrice}
-          onChange={handleChange}
-          name="defaultPrice"
-          type="number"
-        />
-        <SelectField
-          label="Price Type"
-          options={priceTypeOptions}
-          value={formData.priceType}
-          onChange={handleChange}
-          name="priceType"
-        />
-        <Textarea
-          label="Description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          name="description"
-        />
-        {/* Replace with shadcn button */}
-        <Button variant="ghost" size="default" onClick={handleSubmit}>
-          Create
-        </Button>
-      </form>
+      <Formik
+        initialValues={initialFormData}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">Type</label>
+            <Field
+              as="select"
+              name="type"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            >
+              <option value="">Select Type</option>
+              {typeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="type"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <Field
+              name="name"
+              placeholder="Name"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            />
+            <ErrorMessage
+              name="name"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <Field
+              name="defaultPrice"
+              type="number"
+              placeholder="Default Price"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            />
+            <ErrorMessage
+              name="defaultPrice"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">Price Type</label>
+            <Field
+              as="select"
+              name="priceType"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            >
+              <option value="">Select Price Type</option>
+              {priceTypeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="priceType"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <Field
+              name="description"
+              as="textarea"
+              placeholder="Description"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+              rows="4"
+            />
+            <ErrorMessage
+              name="description"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <Button variant="ghost" size="default" type="submit">
+            Create
+          </Button>
+        </Form>
+      </Formik>
     </div>
   );
 };

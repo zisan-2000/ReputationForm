@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`flex h-screen flex-col bg-gray-800 text-white ${
+      className={` flex h-screen flex-col bg-gray-800 text-white ${
         isCollapsed ? "w-16" : "w-64"
       } transition-all duration-300`}
     >
@@ -40,7 +40,7 @@ const Sidebar = () => {
       {/* Sidebar Middle (scrollable section) */}
       <div className="flex-1 overflow-y-auto">
         <nav>
-          <ul className="space-y-2">
+          <ul className="mt-6 space-y-2 p-2">
             {SidebarData.map((item, index) => (
               <li key={index}>
                 <NavLink
@@ -56,7 +56,7 @@ const Sidebar = () => {
                     className={`${
                       isCollapsed
                         ? "absolute left-20 hidden rounded-lg bg-gray-800 p-2 group-hover:block"
-                        : "ml-4"
+                        : "ml-4 "
                     }`}
                   >
                     {item.title}

@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import AvatarList from "../components/ReuseableComp/AvatarList";
-import CheckboxField from "../components/ReuseableComp/CheckboxField";
-import DateField from "../components/ReuseableComp/DateField";
-import InputField from "../components/ReuseableComp/InputField";
-import SelectField from "../components/ReuseableComp/SelectField";
-import Textarea from "../components/ReuseableComp/Textarea";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import {
   activityOptions,
   businessOrClientOptions,
@@ -14,136 +8,242 @@ import {
   initialFormData,
   singleUseFrequencyOptions,
   typeOptions,
+  validationSchema,
 } from "../Data/CreateTaskData";
 
 const CreateTask = () => {
-  const [formData, setFormData] = useState(initialFormData);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = () => {
-    // Handle form submission logic here
-    console.log("Form Data:", formData);
-  };
-
-  const handleAddOwner = () => {
-    // Handle the logic for adding a new owner (e.g., open a modal or prompt)
-    console.log("Add owner functionality not implemented yet");
+  const handleSubmit = (values, { resetForm }) => {
+    console.log("Form Data:", values);
+    resetForm();
   };
 
   return (
     <div className="mx-auto mt-8 max-w-3xl rounded bg-white p-4 shadow-lg">
       <h2 className="mb-6 text-2xl">Create New Task</h2>
-      <form>
-        <div className="grid grid-cols-2 gap-4">
-          <SelectField
-            label="Select Category"
-            options={categoryOptions}
-            value={formData.category}
-            onChange={handleChange}
-            name="category"
-          />
-          <SelectField
-            label="Select Type"
-            options={typeOptions}
-            value={formData.type}
-            onChange={handleChange}
-            name="type"
-          />
-        </div>
-        <InputField
-          label="Task Title"
-          placeholder="Task Title"
-          value={formData.taskTitle}
-          onChange={handleChange}
-          name="taskTitle"
-        />
-        <Textarea
-          label="Instructions"
-          placeholder="Instructions"
-          value={formData.instructions}
-          onChange={handleChange}
-          name="instructions"
-        />
+      <Formik
+        initialValues={initialFormData}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-2 block text-gray-700">
+                Select Category
+              </label>
+              <Field
+                as="select"
+                name="category"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              >
+                <option value="">Select Category</option>
+                {categoryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage
+                name="category"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
 
-        <h3 className="mb-2 mt-6 text-lg">Template Settings</h3>
-        <div className="flex gap-4">
-          <CheckboxField
-            label="Save to Library"
-            checked={formData.saveToLibrary}
-            onChange={handleChange}
-            name="saveToLibrary"
-          />
-          <CheckboxField
-            label="Require Activity"
-            checked={formData.requireActivity}
-            onChange={handleChange}
-            name="requireActivity"
-          />
-        </div>
+            <div>
+              <label className="mb-2 block text-gray-700">Select Type</label>
+              <Field
+                as="select"
+                name="type"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              >
+                <option value="">Select Type</option>
+                {typeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage
+                name="type"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+          </div>
 
-        <SelectField
-          label="Select Activity"
-          options={activityOptions}
-          value={formData.activity}
-          onChange={handleChange}
-          name="activity"
-        />
-        <div className="grid grid-cols-2 gap-4">
-          <SelectField
-            label="Select Frequency"
-            options={frequencyOptions}
-            value={formData.frequency}
-            onChange={handleChange}
-            name="frequency"
-          />
-          <InputField
-            label="Due in (number of days)"
-            placeholder="Enter number of days"
-            value={formData.dueIn}
-            onChange={handleChange}
-            name="dueIn"
-            type="number"
-          />
-        </div>
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">Task Title</label>
+            <Field
+              name="taskTitle"
+              placeholder="Task Title"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            />
+            <ErrorMessage
+              name="taskTitle"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
 
-        <h3 className="mb-2 mt-6 text-lg">Single Use Settings</h3>
-        {/* Add avatars for owners here (can be expanded later) */}
-        <AvatarList owners={formData.owners} onAdd={handleAddOwner} />
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">Instructions</label>
+            <Field
+              name="instructions"
+              as="textarea"
+              placeholder="Instructions"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+              rows="4"
+            />
+            <ErrorMessage
+              name="instructions"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
 
-        <SelectField
-          label="Business or Client"
-          options={businessOrClientOptions}
-          value={formData.businessOrClient}
-          onChange={handleChange}
-          name="businessOrClient"
-        />
-        <div className="grid grid-cols-2 gap-4">
-          <SelectField
-            label="Select Frequency"
-            options={singleUseFrequencyOptions}
-            value={formData.singleUseFrequency}
-            onChange={handleChange}
-            name="singleUseFrequency"
-          />
-          <DateField
-            label="Select Date"
-            value={formData.date}
-            onChange={handleChange}
-            name="date"
-          />
-        </div>
-        {/* Replace with shadcn button */}
-        <Button variant="ghost" size="default" onClick={handleSubmit}>
-          Create
-        </Button>
-      </form>
+          <h3 className="mb-2 mt-6 text-lg">Template Settings</h3>
+          <div className="mb-4 flex gap-4">
+            <label>
+              <Field type="checkbox" name="saveToLibrary" />
+              Save to Library
+            </label>
+            <label>
+              <Field type="checkbox" name="requireActivity" />
+              Require Activity
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">Select Activity</label>
+            <Field
+              as="select"
+              name="activity"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            >
+              <option value="">Select Activity</option>
+              {activityOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="activity"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4 grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-2 block text-gray-700">
+                Select Frequency
+              </label>
+              <Field
+                as="select"
+                name="frequency"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              >
+                <option value="">Select Frequency</option>
+                {frequencyOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage
+                name="frequency"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+            <div>
+              <label className="mb-2 block text-gray-700">
+                Due in (number of days)
+              </label>
+              <Field
+                name="dueIn"
+                type="number"
+                placeholder="Enter number of days"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              />
+              <ErrorMessage
+                name="dueIn"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+          </div>
+
+          <h3 className="mb-2 mt-6 text-lg">Single Use Settings</h3>
+
+          <div className="mb-4">
+            <label className="mb-2 block text-gray-700">
+              Business or Client
+            </label>
+            <Field
+              as="select"
+              name="businessOrClient"
+              className="w-full rounded border border-gray-300 px-4 py-2"
+            >
+              <option value="">Select Business or Client</option>
+              {businessOrClientOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="businessOrClient"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+
+          <div className="mb-4 grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-2 block text-gray-700">
+                Select Frequency
+              </label>
+              <Field
+                as="select"
+                name="singleUseFrequency"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              >
+                <option value="">Select Frequency</option>
+                {singleUseFrequencyOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage
+                name="singleUseFrequency"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+            <div>
+              <label className="mb-2 block text-gray-700">Select Date</label>
+              <Field
+                name="date"
+                type="date"
+                className="w-full rounded border border-gray-300 px-4 py-2"
+              />
+              <ErrorMessage
+                name="date"
+                component="div"
+                className="text-red-500"
+              />
+            </div>
+          </div>
+
+          <Button variant="ghost" size="default" type="submit">
+            Create
+          </Button>
+        </Form>
+      </Formik>
     </div>
   );
 };

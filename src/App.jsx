@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import CreateLead from "./pages/CreateLead";
+import CreateNewIntake from "./pages/CreateNewIntake";
 import CreateProduct from "./pages/CreateProduct"; // Import the new page
 import CreateTask from "./pages/CreateTask";
 import Home from "./pages/Home";
@@ -20,13 +21,14 @@ const App = () => {
           <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto bg-gray-100 p-6">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/create-lead" element={<CreateLead />} />
+              <Route path="/create-task" element={<CreateTask />} />
+              <Route path="/create-product" element={<CreateProduct />} />{" "}
+              <Route path="/create-new-intake" element={<CreateNewIntake />} />{" "}
               <Route path="/my-plan" element={<MyPlan />} />
               <Route path="/my-post" element={<MyPost />} />
               <Route path="/my-articles" element={<MyArticles />} />
               <Route path="/status" element={<Status />} />
-              <Route path="/create-lead" element={<CreateLead />} />
-              <Route path="/create-task" element={<CreateTask />} />
-              <Route path="/create-product" element={<CreateProduct />} />{" "}
               {/* New Route */}
             </Routes>
           </main>
