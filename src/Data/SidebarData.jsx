@@ -7,7 +7,6 @@ import {
   FaFileArchive,
   FaImage,
   FaTasks,
-  FaUserCog,
   FaUserPlus,
 } from "react-icons/fa";
 
@@ -59,14 +58,14 @@ const SidebarData = [
   },
 
   {
-    title: "Client Dashboard",
-    path: "/ClientDashboard",
-    icon: <FaUserCog size={iconSize} />, // Apply the related icon for client management
+    title: "Pyramid Chart",
+    path: "/PyramidChart",
+    icon: <FcAreaChart size={iconSize} />, // Apply the related icon for client management
   },
 
   {
-    title: "Pyramid Chart",
-    path: "/PyramidChart",
+    title: "Pyramid Chart3",
+    path: "/PyramidChart3",
     icon: <FcAreaChart size={iconSize} />, // Apply the related icon for client management
   },
 

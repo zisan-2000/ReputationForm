@@ -7,6 +7,7 @@ import PieChartComponent from "@/components/Charts/PieChart";
 import PieChart2 from "@/components/Charts/PieChart2";
 import PublishedContentChart from "@/components/Charts/PublishedContentChart";
 import PyramidChart from "@/components/Charts/PyramidChart";
+import PyramidChart3 from "@/components/Charts/PyramidChart3";
 import StackedAreaChart from "@/components/Charts/StackedAreaChart";
 import VerticalBarChart from "@/components/Charts/VerticalBarChart";
 import ClientDashboard from "@/components/ClientDashboard";
@@ -14,8 +15,6 @@ import ClientDashboard from "@/components/ClientDashboard";
 const DashboardPage = () => {
   return (
     <div className="dashboard-page container mx-auto my-6 px-4">
-      <h1 className="dashboard-title">Dashboard Page</h1>
-
       {/* Client and Audit Dashboards in flex layout */}
       <div className="flex-wrap-container">
         <div className="chart-container">
@@ -25,7 +24,7 @@ const DashboardPage = () => {
 
         <div className="chart-container">
           <h2 className="chart-title">Pyramid Chart</h2>
-          <PyramidChart />
+          <PyramidChart3 />
         </div>
       </div>
 
@@ -83,6 +82,13 @@ const DashboardPage = () => {
         <div className="chart-container">
           <h2 className="chart-title">Vertical Bar Chart</h2>
           <VerticalBarChart />
+        </div>
+      </div>
+
+      <div className="flex-wrap-container">
+        <div className="chart-container">
+          <h2 className="chart-title">PyramidChart</h2>
+          <PyramidChart />
         </div>
       </div>
     </div>

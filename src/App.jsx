@@ -8,13 +8,13 @@ import PieChartComponent from "./components/Charts/PieChart";
 import PieChart2 from "./components/Charts/PieChart2";
 import PublishedContentChart from "./components/Charts/PublishedContentChart";
 import PyramidChart from "./components/Charts/PyramidChart";
+import PyramidChart3 from "./components/Charts/PyramidChart3";
 import StackedAreaChart from "./components/Charts/StackedAreaChart";
 import VerticalBarChart from "./components/Charts/VerticalBarChart";
 import ClientDashboard2 from "./components/ClientDashboard";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import BrandAssetsForm from "./pages/BrandAssetsForm";
-import ClientDashboard from "./pages/ClientDashboard";
 import CreateContactForm from "./pages/CreateContactForm";
 import CreateLead from "./pages/CreateLead";
 import CreateNewIntake from "./pages/CreateNewIntake";
@@ -39,7 +39,6 @@ const App = () => {
               <Route path="/create-new-intake" element={<CreateNewIntake />} />{" "}
               <Route path="/ContactForm" element={<CreateContactForm />} />
               <Route path="/BrandAssets" element={<BrandAssetsForm />} />
-              <Route path="/ClientDashboard" element={<ClientDashboard />} />
               <Route
                 path="/PublishedContentChart"
                 element={<PublishedContentChart />}
@@ -50,6 +49,7 @@ const App = () => {
                 element={<HorizontalBarChart />}
               />
               <Route path="/PyramidChart" element={<PyramidChart />} />
+              <Route path="/PyramidChart3" element={<PyramidChart3 />} />
               <Route path="/MultiLineChart" element={<MultiLineChart />} />
               <Route path="/piechart" element={<PieChartComponent />} />
               <Route
