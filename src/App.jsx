@@ -1,15 +1,27 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import AuditDashboard from "./components/AuditDashboard";
+import GroupedBarChart from "./components/Charts/GroupedBarChart";
+import HorizontalBarChart from "./components/Charts/HorizontalBarChart";
+import HorizontalBarChart2 from "./components/Charts/HorizontalBarChart2";
+import MultiLineChart from "./components/Charts/MultiLineChart";
+import PieChartComponent from "./components/Charts/PieChart";
+import PieChart2 from "./components/Charts/PieChart2";
+import PublishedContentChart from "./components/Charts/PublishedContentChart";
+import PyramidChart from "./components/Charts/PyramidChart";
+import StackedAreaChart from "./components/Charts/StackedAreaChart";
+import VerticalBarChart from "./components/Charts/VerticalBarChart";
+import ClientDashboard2 from "./components/ClientDashboard";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import BrandAssetsForm from "./pages/BrandAssetsForm";
+import ClientDashboard from "./pages/ClientDashboard";
+import CreateContactForm from "./pages/CreateContactForm";
 import CreateLead from "./pages/CreateLead";
 import CreateNewIntake from "./pages/CreateNewIntake";
 import CreateProduct from "./pages/CreateProduct"; // Import the new page
 import CreateTask from "./pages/CreateTask";
+import DashboardPage from "./pages/DashboardPage";
 import Home from "./pages/Home";
-import MyArticles from "./pages/MyArticles";
-import MyPlan from "./pages/MyPlan";
-import MyPost from "./pages/MyPost";
-import Status from "./pages/Status";
 
 const App = () => {
   return (
@@ -18,17 +30,38 @@ const App = () => {
         <Sidebar />
         <div className="flex flex-1 flex-col">
           <Header />
-          <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto bg-gray-100 p-6">
+          <main className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto bg-pink-100 p-6">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/create-lead" element={<CreateLead />} />
               <Route path="/create-task" element={<CreateTask />} />
               <Route path="/create-product" element={<CreateProduct />} />{" "}
               <Route path="/create-new-intake" element={<CreateNewIntake />} />{" "}
-              <Route path="/my-plan" element={<MyPlan />} />
-              <Route path="/my-post" element={<MyPost />} />
-              <Route path="/my-articles" element={<MyArticles />} />
-              <Route path="/status" element={<Status />} />
+              <Route path="/ContactForm" element={<CreateContactForm />} />
+              <Route path="/BrandAssets" element={<BrandAssetsForm />} />
+              <Route path="/ClientDashboard" element={<ClientDashboard />} />
+              <Route
+                path="/PublishedContentChart"
+                element={<PublishedContentChart />}
+              />
+              <Route path="/StackedAreaChart" element={<StackedAreaChart />} />
+              <Route
+                path="/HorizontalBarChart"
+                element={<HorizontalBarChart />}
+              />
+              <Route path="/PyramidChart" element={<PyramidChart />} />
+              <Route path="/MultiLineChart" element={<MultiLineChart />} />
+              <Route path="/piechart" element={<PieChartComponent />} />
+              <Route
+                path="/HorizontalBarChart2"
+                element={<HorizontalBarChart2 />}
+              />
+              <Route path="/VerticalBarChart" element={<VerticalBarChart />} />
+              <Route path="/GroupedBarChart" element={<GroupedBarChart />} />
+              <Route path="/PieChart2" element={<PieChart2 />} />
+              <Route path="/ClientDashboard2" element={<ClientDashboard2 />} />
+              <Route path="/AuditDashboard" element={<AuditDashboard />} />
+              <Route path="/DashboardPage" element={<DashboardPage />} />
               {/* New Route */}
             </Routes>
           </main>

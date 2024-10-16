@@ -18,7 +18,7 @@ const CreateNewIntake = () => {
   };
 
   return (
-    <div className="mx-auto mt-8 max-w-3xl rounded bg-white p-4 shadow-lg">
+    <div className="mx-auto mt-8 max-w-4xl rounded bg-white p-4 shadow-lg">
       <h2 className="mb-6 text-2xl">Create New Intake</h2>
       <Formik
         initialValues={initialFormData}
@@ -347,8 +347,10 @@ const CreateNewIntake = () => {
             {/* File Uploads */}
             <h3 className="mb-2 mt-6 text-lg">File Uploads</h3>
             <div className="mb-4 space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="text-gray-600">Final Proposal</label>
+              <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
+                <label className="mb-2 text-gray-600 sm:mb-0">
+                  Final Proposal
+                </label>
                 <input
                   type="file"
                   onChange={(e) =>
@@ -363,8 +365,10 @@ const CreateNewIntake = () => {
                   className="text-red-500"
                 />
               </div>
-              <div className="flex items-center justify-between">
-                <label className="text-gray-600">Pre-Sale Email History</label>
+              <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
+                <label className="mb-2 text-gray-600 sm:mb-0">
+                  Pre-Sale Email History
+                </label>
                 <input
                   type="file"
                   onChange={(e) =>
@@ -382,8 +386,10 @@ const CreateNewIntake = () => {
                   className="text-red-500"
                 />
               </div>
-              <div className="flex items-center justify-between">
-                <label className="text-gray-600">CC Authorization</label>
+              <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
+                <label className="mb-2 text-gray-600 sm:mb-0">
+                  CC Authorization
+                </label>
                 <input
                   type="file"
                   onChange={(e) =>

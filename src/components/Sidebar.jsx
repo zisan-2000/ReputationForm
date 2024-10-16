@@ -24,7 +24,7 @@ const Sidebar = () => {
   return (
     <div
       className={` flex h-screen flex-col bg-gray-800 text-white ${
-        isCollapsed ? "w-16" : "w-64"
+        isCollapsed ? "w-20" : "w-72"
       } transition-all duration-300`}
     >
       {/* Sidebar Header */}
@@ -69,7 +69,7 @@ const Sidebar = () => {
       </div>
 
       {/* Sidebar Footer */}
-      <div className="sticky bottom-0 bg-gray-800 p-4">
+      <div className="sticky bottom-0 bg-gray-700 p-4">
         <p className={`text-sm ${isCollapsed ? "hidden" : "block"}`}>
           &copy; 2024 Reputation Prime
         </p>

@@ -18,7 +18,7 @@ const CreateTask = () => {
   };
 
   return (
-    <div className="mx-auto mt-8 max-w-3xl rounded bg-white p-4 shadow-lg">
+    <div className="mx-auto mt-8 max-w-4xl rounded bg-white p-4 shadow-lg">
       <h2 className="mb-6 text-2xl">Create New Task</h2>
       <Formik
         initialValues={initialFormData}
