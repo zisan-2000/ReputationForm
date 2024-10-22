@@ -1,4 +1,3 @@
-// PieChartComponent.jsx
 import PropTypes from "prop-types";
 import {
   Cell,
@@ -9,50 +8,49 @@ import {
   Tooltip,
 } from "recharts";
 
-const PieChartComponent = ({
+const DonutChart = ({
   data,
-  outerRadius = 150,
-  chartHeight = 400,
-  cx = "50%",
-  cy = "50%",
+  innerRadius = 70,
+  outerRadius = 100,
+  startAngle = 90,
+  endAngle = 450,
 }) => {
   return (
-    <ResponsiveContainer width="100%" height={chartHeight}>
+    <ResponsiveContainer width="100%" height={400}>
       <PieChart>
         <Pie
           data={data}
-          dataKey="value"
-          nameKey="name"
-          cx={cx}
-          cy={cy}
+          cx="50%"
+          cy="50%"
+          innerRadius={innerRadius}
           outerRadius={outerRadius}
-          label={({ name, percent }) =>
-            `${name} ${(percent * 100).toFixed(0)}%`
-          }
+          dataKey="value"
+          startAngle={startAngle}
+          endAngle={endAngle}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip />
-        <Legend verticalAlign="right" layout="vertical" />
+        <Legend align="center" verticalAlign="bottom" height={36} />
       </PieChart>
     </ResponsiveContainer>
   );
 };
 
-PieChartComponent.propTypes = {
+DonutChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       value: PropTypes.number.isRequired,
-      color: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired, // Add color prop validation
     }),
   ).isRequired,
+  innerRadius: PropTypes.number,
   outerRadius: PropTypes.number,
-  chartHeight: PropTypes.number,
-  cx: PropTypes.string,
-  cy: PropTypes.string,
+  startAngle: PropTypes.number,
+  endAngle: PropTypes.number,
 };
 
-export default PieChartComponent;
+export default DonutChart;

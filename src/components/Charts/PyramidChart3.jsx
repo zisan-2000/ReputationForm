@@ -1,53 +1,53 @@
+// PyramidChart3.jsx
 import * as echarts from "echarts";
+import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
-const PyramidChart3 = () => {
+const PyramidChart3 = ({ data, options, chartHeight = "300px" }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const chartInstance = echarts.init(chartRef.current);
 
-    const option = {
-      title: {
-        text: "Pyramid Chart ",
-        left: "center",
-      },
-      tooltip: {
-        trigger: "item",
-        formatter: "{b}: {c}",
-      },
+    const defaultOptions = {
       series: [
         {
           name: "Data",
           type: "funnel",
-          sort: "ascending", // Makes it appear like an ascending pyramid
-          data: [
-            { value: 40, name: "Onboarding" },
-            { value: 80, name: "Planning" },
-            { value: 120, name: "Paused" },
-            { value: 160, name: "Active" },
-          ],
+          data: data.map((item) => ({
+            ...item,
+            itemStyle: { color: item.color }, // Set individual colors
+          })),
           label: {
             position: "inside",
             formatter: "{b} ({c})",
           },
-          itemStyle: {
-            borderColor: "#fff",
-            borderWidth: 2,
-          },
+          ...options,
         },
       ],
     };
 
-    chartInstance.setOption(option);
+    chartInstance.setOption(defaultOptions);
 
-    // Cleanup the chart on component unmount
+    // Cleanup on component unmount
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data, options]);
 
-  return <div ref={chartRef} style={{ width: "100%", height: "500px" }} />;
+  return <div ref={chartRef} style={{ width: "100%", height: chartHeight }} />;
+};
+
+PyramidChart3.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired, // Validate color
+    }),
+  ).isRequired,
+  options: PropTypes.object,
+  chartHeight: PropTypes.string,
 };
 
 export default PyramidChart3;

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import profile from "../assets/images/profile.jpg";
+import profile from "../../assets/images/profile.jpg";
 
 // Dummy user object for demonstration; replace with actual user data source
 const user = {
@@ -11,7 +11,7 @@ const Header = () => {
   const location = useLocation();
   const pageTitle =
     location.pathname === "/"
-      ? "Home"
+      ? "Dashboard Page"
       : location.pathname.slice(1).charAt(0).toUpperCase() +
         location.pathname.slice(2);
 

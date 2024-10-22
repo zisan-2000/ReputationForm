@@ -1,3 +1,5 @@
+// StackedAreaChart.jsx
+import PropTypes from "prop-types";
 import {
   Area,
   AreaChart,
@@ -9,17 +11,13 @@ import {
   YAxis,
 } from "recharts";
 
-const data = [
-  { month: "February", Pending: 20, Approved: 10, Published: 10 },
-  { month: "March", Pending: 15, Approved: 12, Published: 18 },
-  { month: "April", Pending: 25, Approved: 20, Published: 30 },
-  { month: "May", Pending: 40, Approved: 30, Published: 45 },
-  { month: "June", Pending: 30, Approved: 50, Published: 60 },
-  { month: "July", Pending: 20, Approved: 35, Published: 70 },
-];
-
-const StackedAreaChart = () => (
-  <ResponsiveContainer width="100%" height={400}>
+const StackedAreaChart = ({
+  data,
+  areaColors,
+  xDataKey = "month",
+  chartHeight = 400,
+}) => (
+  <ResponsiveContainer width="100%" height={chartHeight}>
     <AreaChart
       data={data}
       margin={{
@@ -30,45 +28,36 @@ const StackedAreaChart = () => (
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="month" />
+      <XAxis dataKey={xDataKey} />
       <YAxis />
       <Tooltip />
       <Legend verticalAlign="bottom" height={36} />
-
-      {/* Area for Pending data */}
-      <Area
-        type="monotone"
-        dataKey="Pending"
-        stackId="1"
-        stroke="#FF0000"
-        fill="rgba(255, 0, 0, 0.4)"
-        dot={{ fill: "#FF0000" }}
-        activeDot={{ r: 8 }}
-      />
-
-      {/* Area for Approved data */}
-      <Area
-        type="monotone"
-        dataKey="Approved"
-        stackId="1"
-        stroke="#0088FE"
-        fill="rgba(0, 136, 254, 0.4)"
-        dot={{ fill: "#0088FE" }}
-        activeDot={{ r: 8 }}
-      />
-
-      {/* Area for Published data */}
-      <Area
-        type="monotone"
-        dataKey="Published"
-        stackId="1"
-        stroke="#00C49F"
-        fill="rgba(0, 196, 159, 0.4)"
-        dot={{ fill: "#00C49F" }}
-        activeDot={{ r: 8 }}
-      />
+      {Object.keys(areaColors).map((key) => (
+        <Area
+          key={key}
+          type="monotone"
+          dataKey={key}
+          stackId="1"
+          stroke={areaColors[key].stroke}
+          fill={areaColors[key].fill}
+          dot={{ fill: areaColors[key].stroke }}
+          activeDot={{ r: 8 }}
+        />
+      ))}
     </AreaChart>
   </ResponsiveContainer>
 );
+
+StackedAreaChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  areaColors: PropTypes.objectOf(
+    PropTypes.shape({
+      stroke: PropTypes.string.isRequired,
+      fill: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  xDataKey: PropTypes.string,
+  chartHeight: PropTypes.number,
+};
 
 export default StackedAreaChart;

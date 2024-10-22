@@ -1,3 +1,5 @@
+// VerticalBarChart.jsx
+import PropTypes from "prop-types";
 import {
   Bar,
   BarChart,
@@ -9,18 +11,14 @@ import {
   YAxis,
 } from "recharts";
 
-// Sample data based on the image
-const data = [
-  { name: "0 Weeks", value: 2, fill: "#FF0000" }, // Red
-  { name: "5 Weeks", value: 8, fill: "#FF8042" }, // Orange
-  { name: "4 Weeks", value: 12, fill: "#FFBB28" }, // Yellow
-  { name: "3 Weeks", value: 32, fill: "#A020F0" }, // Purple
-  { name: "2 Weeks", value: 22, fill: "#0088FE" }, // Blue
-  { name: "1 Week", value: 12, fill: "#00C49F" }, // Green
-];
-
-const VerticalBarChart = () => (
-  <ResponsiveContainer width="100%" height={400}>
+const VerticalBarChart = ({
+  data,
+  barSize = 50,
+  chartHeight = 400,
+  xAxisDataKey = "name",
+  yAxisDataKey = "value",
+}) => (
+  <ResponsiveContainer width="100%" height={chartHeight}>
     <BarChart
       data={data}
       margin={{
@@ -31,10 +29,10 @@ const VerticalBarChart = () => (
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey={xAxisDataKey} />
       <YAxis />
       <Tooltip />
-      <Bar dataKey="value" barSize={50}>
+      <Bar dataKey={yAxisDataKey} barSize={barSize}>
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={entry.fill} />
         ))}
@@ -42,5 +40,19 @@ const VerticalBarChart = () => (
     </BarChart>
   </ResponsiveContainer>
 );
+
+VerticalBarChart.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      fill: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  barSize: PropTypes.number,
+  chartHeight: PropTypes.number,
+  xAxisDataKey: PropTypes.string,
+  yAxisDataKey: PropTypes.string,
+};
 
 export default VerticalBarChart;

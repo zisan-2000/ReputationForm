@@ -1,3 +1,5 @@
+// PublishedContentChart.jsx
+import PropTypes from "prop-types";
 import {
   Bar,
   BarChart,
@@ -9,47 +11,14 @@ import {
   YAxis,
 } from "recharts";
 
-// Data based on your chart
-const data = [
-  {
-    name: "June 1",
-    Blogs: 15,
-    Pages: 20,
-    Press: 30,
-    Videos: 35,
-  },
-  {
-    name: "June 7",
-    Blogs: 10,
-    Pages: 15,
-    Press: 25,
-    Videos: 20,
-  },
-  {
-    name: "June 14",
-    Blogs: 25,
-    Pages: 30,
-    Press: 20,
-    Videos: 25,
-  },
-  {
-    name: "June 21",
-    Blogs: 35,
-    Pages: 25,
-    Press: 30,
-    Videos: 20,
-  },
-  {
-    name: "June 27",
-    Blogs: 20,
-    Pages: 25,
-    Press: 35,
-    Videos: 40,
-  },
-];
-
-const PublishedContentChart = () => (
-  <ResponsiveContainer width="100%" height={400}>
+const PublishedContentChart = ({
+  data,
+  barColors,
+  barSize = 20,
+  xDataKey = "name",
+  chartHeight = 400,
+}) => (
+  <ResponsiveContainer width="100%" height={chartHeight}>
     <BarChart
       data={data}
       margin={{
@@ -58,19 +27,33 @@ const PublishedContentChart = () => (
         left: 20,
         bottom: 5,
       }}
-      barGap={10} // Gap between grouped bars
+      barGap={10}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey={xDataKey} />
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="Blogs" fill="#0088FE" barSize={20} />
-      <Bar dataKey="Pages" fill="#FFBB28" barSize={20} />
-      <Bar dataKey="Press" fill="#00C49F" barSize={20} />
-      <Bar dataKey="Videos" fill="#FF8042" barSize={20} />
+      {Object.keys(data[0])
+        .filter((key) => key !== xDataKey)
+        .map((key) => (
+          <Bar
+            key={key}
+            dataKey={key}
+            fill={barColors[key] || "#8884d8"} // Default color if not provided
+            barSize={barSize}
+          />
+        ))}
     </BarChart>
   </ResponsiveContainer>
 );
+
+PublishedContentChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  barColors: PropTypes.objectOf(PropTypes.string).isRequired,
+  barSize: PropTypes.number,
+  xDataKey: PropTypes.string,
+  chartHeight: PropTypes.number,
+};
 
 export default PublishedContentChart;

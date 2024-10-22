@@ -1,3 +1,5 @@
+// GroupedBarChart.jsx
+import PropTypes from "prop-types";
 import {
   Bar,
   BarChart,
@@ -10,15 +12,14 @@ import {
   YAxis,
 } from "recharts";
 
-// Data based on the image you provided
-const data = [
-  { name: "Technical", Completed: 45, Pending: 18 },
-  { name: "Schema", Completed: 32, Pending: 5 },
-  { name: "PageSpeed", Completed: 16, Pending: 3 },
-];
-
-const GroupedBarChart = () => (
-  <ResponsiveContainer width="100%" height={400}>
+const GroupedBarChart = ({
+  data,
+  barColors,
+  barSize = 40,
+  chartHeight = 400,
+  xAxisDataKey = "name",
+}) => (
+  <ResponsiveContainer width="100%" height={chartHeight}>
     <BarChart
       data={data}
       margin={{
@@ -29,22 +30,25 @@ const GroupedBarChart = () => (
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey={xAxisDataKey} />
       <YAxis />
       <Tooltip />
       <Legend />
-
-      {/* Completed Bars */}
-      <Bar dataKey="Completed" fill="#0088FE" barSize={40}>
-        <LabelList dataKey="Completed" position="top" />
-      </Bar>
-
-      {/* Pending Bars */}
-      <Bar dataKey="Pending" fill="#FF8042" barSize={40}>
-        <LabelList dataKey="Pending" position="top" />
-      </Bar>
+      {Object.keys(barColors).map((key) => (
+        <Bar key={key} dataKey={key} fill={barColors[key]} barSize={barSize}>
+          <LabelList dataKey={key} position="top" />
+        </Bar>
+      ))}
     </BarChart>
   </ResponsiveContainer>
 );
+
+GroupedBarChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  barColors: PropTypes.objectOf(PropTypes.string).isRequired,
+  barSize: PropTypes.number,
+  chartHeight: PropTypes.number,
+  xAxisDataKey: PropTypes.string,
+};
 
 export default GroupedBarChart;

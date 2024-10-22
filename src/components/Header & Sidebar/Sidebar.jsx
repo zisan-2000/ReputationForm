@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/images/Reputation_Prime_Logo.png";
+import Logo from "../../assets/images/Reputation_Prime_Logo.png";
 
 const Sidebar = () => {
   const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });

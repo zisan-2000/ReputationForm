@@ -5,9 +5,12 @@ import {
   FaChartPie,
   FaEnvelope,
   FaFileArchive,
+  FaIdCardAlt,
   FaImage,
+  FaRegIdCard,
   FaTasks,
   FaUserPlus,
+  FaWpforms,
 } from "react-icons/fa";
 
 import { BsBarChartLineFill, BsBarChartSteps } from "react-icons/bs";
@@ -17,9 +20,12 @@ import {
   MdDashboard,
   MdDashboardCustomize,
   MdOutlineDashboardCustomize,
+  MdWaterfallChart,
 } from "react-icons/md";
 import { RiBarChartGroupedFill } from "react-icons/ri";
 import { TbChartArrows } from "react-icons/tb";
+
+import { GiDonut } from "react-icons/gi";
 
 const iconSize = 28; // Set the size of the icons here
 
@@ -57,14 +63,14 @@ const SidebarData = [
     icon: <FaImage size={iconSize} />, // Image icon representing media or branding
   },
 
-  {
-    title: "Pyramid Chart",
-    path: "/PyramidChart",
-    icon: <FcAreaChart size={iconSize} />, // Apply the related icon for client management
-  },
+  // {
+  //   title: "Pyramid Chart",
+  //   path: "/PyramidChart",
+  //   icon: <FcAreaChart size={iconSize} />, // Apply the related icon for client management
+  // },
 
   {
-    title: "Pyramid Chart3",
+    title: "Pyramid Chart",
     path: "/PyramidChart3",
     icon: <FcAreaChart size={iconSize} />, // Apply the related icon for client management
   },
@@ -127,6 +133,7 @@ const SidebarData = [
     path: "/ClientDashboard2",
     icon: <MdDashboard size={iconSize} />, // Apply the related icon for client management
   },
+
   {
     title: "AuditDashboard",
     path: "/AuditDashboard",
@@ -137,6 +144,60 @@ const SidebarData = [
     title: "DashboardPage ",
     path: "/DashboardPage ",
     icon: <MdOutlineDashboardCustomize size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "BusinessDetailsForm",
+    path: "/BusinessDetailsForm ",
+    icon: <FaWpforms size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "DonutChart",
+    path: "/DonutChart",
+    icon: <GiDonut size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "BalanceCard",
+    path: "/BalanceCard",
+    icon: <FaRegIdCard size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "SummaryCard",
+    path: "/SummaryCard",
+    icon: <FaIdCardAlt size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "SubscriptionCard",
+    path: "/SubscriptionCard",
+    icon: <FaIdCardAlt size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "ProfileCard",
+    path: "/ProfileCard",
+    icon: <FaIdCardAlt size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "Grouped BarChart2",
+    path: "/GroupedBarChart2",
+    icon: <RiBarChartGroupedFill size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "DonutChart2",
+    path: "/DonutChart2",
+    icon: <GiDonut size={iconSize} />, // Apply the related icon for client management
+  },
+
+  {
+    title: "StackedBarChart",
+    path: "/StackedBarChart",
+    icon: <MdWaterfallChart size={iconSize} />, // Apply the related icon for client management
   },
 ];
 

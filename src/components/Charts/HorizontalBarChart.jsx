@@ -1,3 +1,5 @@
+// HorizontalBarChart.jsx
+import PropTypes from "prop-types";
 import {
   Bar,
   BarChart,
@@ -9,17 +11,14 @@ import {
   YAxis,
 } from "recharts";
 
-// Sample data based on the image
-const data = [
-  { name: "Great", value: 15, fill: "#0088FE" },
-  { name: "Good", value: 35, fill: "#00C49F" },
-  { name: "Need Improvement", value: 8, fill: "#A020F0" },
-  { name: "Bad", value: 10, fill: "#FF8042" },
-  { name: "Critical", value: 3, fill: "#FF0000" },
-];
-
-const HorizontalBarChart = () => (
-  <ResponsiveContainer width="100%" height={400}>
+const HorizontalBarChart = ({
+  data,
+  barSize = 40,
+  chartHeight = 400,
+  xAxisType = "number",
+  yAxisDataKey = "name",
+}) => (
+  <ResponsiveContainer width="100%" height={chartHeight}>
     <BarChart
       layout="vertical"
       data={data}
@@ -31,11 +30,10 @@ const HorizontalBarChart = () => (
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis type="number" />
-      <YAxis type="category" dataKey="name" />
+      <XAxis type={xAxisType} />
+      <YAxis type="category" dataKey={yAxisDataKey} />
       <Tooltip />
-      <Bar dataKey="value" barSize={40} label={{ position: "right" }}>
-        {/* Use colors based on the data */}
+      <Bar dataKey="value" barSize={barSize} label={{ position: "right" }}>
         {data.map((entry, index) => (
           <Bar key={`bar-${index}`} fill={entry.fill}>
             <LabelList dataKey="value" position="right" />
@@ -45,5 +43,19 @@ const HorizontalBarChart = () => (
     </BarChart>
   </ResponsiveContainer>
 );
+
+HorizontalBarChart.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      fill: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  barSize: PropTypes.number,
+  chartHeight: PropTypes.number,
+  xAxisType: PropTypes.string,
+  yAxisDataKey: PropTypes.string,
+};
 
 export default HorizontalBarChart;
